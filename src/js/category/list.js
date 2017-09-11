@@ -10,10 +10,10 @@ headerJS();
 
 
 $.ajax({
-   url:"/v6/category",
+    url:"/v6/category",
     type:"get",
     success:function(data){
-        console.log(data.result);
         $(".table-bordered").append(template("category",data.result));
+
     }
 });
