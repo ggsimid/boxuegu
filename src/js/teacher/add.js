@@ -19,9 +19,11 @@ $(".teacher-add form").on("submit",function(){
         data:key,
         success:function(data){
             if(data.code==200){
-                alert(data.msg);
+                location.href = "/dist/html/teacher/list.html";
             }
         }
     });
     return false;
 });
+
+//添加之后应该跳转到teacherlist页面
