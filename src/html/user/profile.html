@@ -27,10 +27,13 @@
         </div>
     </div>
 
+
     <!--资料模板-->
     <script type="text/tpl" id="teacher-profile">
         <div class="settings">
-                    <form  id="profile" action="/v6/teacher/modify"  method="post" class="form-horizontal">
+                    <!--enctype="multipart/form-data"-->
+                    <form  id="profile" action="/v6/teacher/modify"   enctype="multipart/form-data"
+                         method="post" class="form-horizontal"   >
 
                         <input type="hidden" name="tc_id" value="{{ tc_id }}"/>
                         <div class="form-group">
@@ -40,14 +43,25 @@
                             </div>
                         </div>
                         <div class="form-group">
+
+
+
+                            <!-- 添加图片-->
                             <label for="" class="col-xs-3 control-label">头像</label>
                             <div class="col-xs-2 preview">
-                                <img id="head" src={{ tc_avatar }}  >
+                                <img id="head" src={{ tc_avatar }}>
+
                                 <input type="file" id="upfile">
+
                                 <div class="cover">
                                     <i class="fa fa-upload"></i>
                                 </div>
                             </div>
+                            <!--一般不使用BASE64方式上传图片，转成Bold形式-->
+
+
+
+
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">昵称</label>

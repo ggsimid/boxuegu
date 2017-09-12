@@ -7,3 +7,14 @@ asideJS();
 //Í·²¿
 var headerJS = require("./../common/header.js");
 headerJS();
+
+
+$.ajax({
+   url:"/v6/course",
+    type:"get",
+    success:function(data){
+        $("#courses").html(template("course-list",data.result));
+
+    }
+});
+
