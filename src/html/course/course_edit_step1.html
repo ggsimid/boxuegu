@@ -33,31 +33,13 @@
 
 
                     <!-- 步聚 -->
-                    <ul class="forwards list-unstyled">
-                        <li>
-                            <a href="./course_edit_step1.html" class="active">
-                            <b>1</b>
-                            基本信息
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./course_edit_step2.html">
-                            <b>2</b>
-                            课程图片
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./course_edit_step3.html">
-                            <b>3</b>
-                            课时管理
-                            </a>
-                        </li>
+                    <ul id="course_edit_aside"  class="forwards list-unstyled">
+                       <!-- 则边栏的模板的坑-->
                     </ul>
 
 
                     <!-- 基本信息 -->
                     <div id="tpl_2" class="content">
-
                         <!-- 基本信息设置的坑-->
                     </div>
 
@@ -68,28 +50,35 @@
 
     <!--课程信息摘要-->
     <script type="text/tpl" id="course-brief">
-
-            <div class="thumb">
-                <!--先写死-->
-                <img src="/public/img/course.png" alt="">
-
-            </div>
-            <dl class="info">
-                <dt>{{cs_name}}</dt>
-                <dd>讲师：{{tc_name}}</dd>
-                <dd>课时：32</dd>
-            </dl>
+        <div class="thumb">
+            <!-- 模板即使数据里面填的是字符串，但是占位符外面还是要双引号-->
+            <img src="{{cs_cover}}" alt="">
+        </div>
+        <dl class="info">
+            <dt>{{cs_name}}</dt>
+            <dd>讲师：{{tc_name}}</dd>
+            <dd>课时：32</dd>
+        </dl>
     </script>
 
+
+    <!--侧边栏模板-->
+    <script type="text/tpl" id="course-edit-aside">
+        <!--build:course_aside-->
+        <!--endbuild-->
+    </script>
+
+
+    <!-- 课程基本模板-->
     <script type="text/tpl" id="course-set">
         <!-- 标题 -->
         <div class="title">
             <h5>基本信息 <small>BASIC INFORMATION</small></h5>
         </div>
 
-
         <form id="courseMessage" action="/v6/course/update/basic" method="post"  class="basic form-horizontal">
-            <input type="hidden" name=cs_id value={{cs_id}}/>
+            <input type="hidden" name="cs_id" value={{cs_id}} />
+
             <div class="form-group">
                 <label for="" class="col-xs-2 control-label">标题</label>
                 <div class="col-xs-8">
@@ -105,29 +94,31 @@
             <div class="form-group">
                 <label for="" class="col-xs-2 control-label">讲师</label>
                 <div class="col-xs-8">
-                    <select  name="cs_tc_id" value="{{cs_tc_id}}" class="form-control input-sm">
-
+                    <select  name="cs_tc_id"  class="form-control input-sm">
+                        <!--讲师下拉列表-->
                         {{each teacher  option i}}
                             <option  {{cs_tc_id==option.tc_id?"selected":""}} value="{{option.tc_id}}">{{option.tc_name}}</option>
                         {{/each}}
 
                     </select>
 
+
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-xs-2 control-label">分类</label>
                 <div class="col-xs-8">
-                    <select name="cs_cg_id"  class="form-control input-sm">
-                        <!--select上传的value是谁的？-->
+                    <select  id="select_1" name=""  class="form-control input-sm">
+                        <!--顶级分类-->
                         {{each category.top  option i}}
-                            <option  {{cs_cg_id==option.cg_id?"selected":""}}  value="{{option.cg_id}}">{{option.cg_name}}</option>
+                            <option  {{cs_cg_pid==option.cg_id?"selected":""}}  value="{{option.cg_id}}">{{option.cg_name}}</option>
                         {{/each}}
 
                     </select>
-                    <select name="" class="form-control input-sm">
 
-                        <!-- 二级联动的坑-->
+                    <select  id="select_2" name="cs_cg_id" class="form-control input-sm">
+
+                        <!-- 子集分类：二级联动的坑-->
 
                     </select>
                 </div>
@@ -148,12 +139,17 @@
     </script>
 
 
+    <!--二级联动模板-->
+    <script type="text/tpl" id="course-set-secend">
 
-    <script type="text/tpl" id="secendOption">
-        {{each category  option i}}
-            <option    value="{{option.cg_id}}">{{option.cg_name}}</option>
+        {{each $data  Coption i}}
+            <option   value="{{Coption.cg_id}}">{{Coption.cg_name}}</option>
         {{/each}}
+
     </script>
+
+
+
 
     <script src="/dist/js/del.js"></script>
 	<script src="/dist/js/course/course_edit_step1.js"></script>

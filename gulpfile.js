@@ -22,7 +22,8 @@ gulp.task("html",function(){
        .pipe(replace({
            aside:gulp.src("src/html/common/aside.html"),
            header:gulp.src("src/html/common/header.html"),
-           csslink:gulp.src("src/html/common/csslink.html")
+           csslink:gulp.src("src/html/common/csslink.html"),
+           course_aside:gulp.src("src/html/common/course/aside.html")
        }))
        .pipe(htmlmin({
            collapseWhitespace: true, // 去掉空白字符

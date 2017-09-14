@@ -8,25 +8,25 @@ asideJS();
 var headerJS = require("./../common/header.js");
 headerJS();
 
+
 $.ajax({
    url:"/v6/category/top",
     type:"get",
     success:function(data){
 
         $("#select").html(template("option",data.result))
-                .on("change",function(){
-                var vs = $("#select option:selected").val();
-                //联动:使用onchange事件,然后去找对应的option的value值
-                $.ajax({
-                    url:"/v6/category/child",
-                    type:"get",
-                    data:"cg_id="+vs,
-                    success:function(data){
-                        $("#secendSelect").html(template("secendOption",data.result));
-                    }
-                });
+            .on("change",function(){
+            var vs = $("#select option:selected").val();
+            //联动:使用onchange事件,然后去找对应的option的value值
+            $.ajax({
+                url:"/v6/category/child",
+                type:"get",
+                data:"cg_id="+vs,
+                success:function(data){
+                    $("#secendSelect").html(template("secendOption",data.result));
+                }
+            });
         })
-
     }
 });
 
